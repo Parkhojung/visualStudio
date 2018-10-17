@@ -5,8 +5,8 @@ using namespace std;
 #define COL 4
 #define THRESHOLD 1
 
-void strassen(int n, const int A[ROW][COL], const int B[ROW][COL], int C[ROW][COL]);
-void matrixmult(int n, const int A[ROW][COL], const int B[ROW][COL], int C[ROW][COL]);
+void strassen(int n, const int A[][n], const int B[][n], int C[][n]);
+void matrixmult(int n, const int A[][n], const int B[][n], int C[][n]);
 void matrixPrint(int n, const int *A);
 int main() {
 
@@ -47,20 +47,46 @@ void strassen(int n, const int A[ROW][COL], const int B[ROW][COL], int C[ROW][CO
 		int **A12 = (int**)malloc(sizeof(int*) * n / 2);
 		int **A21 = (int**)malloc(sizeof(int*) * n / 2);
 		int **A22 = (int**)malloc(sizeof(int*) * n / 2);
+
 		int **B11 = (int**)malloc(sizeof(int*) * n / 2);
 		int **B12 = (int**)malloc(sizeof(int*) * n / 2);
 		int **B21 = (int**)malloc(sizeof(int*) * n / 2);
 		int **B22 = (int**)malloc(sizeof(int*) * n / 2);
+
+		int **M1 = (int**)malloc(sizeof(int*) * n / 2);
+		int **M2 = (int**)malloc(sizeof(int*) * n / 2);
+		int **M3 = (int**)malloc(sizeof(int*) * n / 2);
+		int **M4 = (int**)malloc(sizeof(int*) * n / 2);
+		int **M5 = (int**)malloc(sizeof(int*) * n / 2);
+		int **M6 = (int**)malloc(sizeof(int*) * n / 2);
+		int **M7 = (int**)malloc(sizeof(int*) * n / 2);
+
+		int **T1 = (int**)malloc(sizeof(int*) * n / 2);
+		int **T2 = (int**)malloc(sizeof(int*) * n / 2);
+
 
 		for (i = 0; i < n / 2; i++) {
 			A11[i] = (int*)malloc(sizeof(int) * n / 2);
 			A12[i] = (int*)malloc(sizeof(int) * n / 2);
 			A21[i] = (int*)malloc(sizeof(int) * n / 2);
 			A22[i] = (int*)malloc(sizeof(int) * n / 2);
+
 			B11[i] = (int*)malloc(sizeof(int) * n / 2);
 			B12[i] = (int*)malloc(sizeof(int) * n / 2);
 			B21[i] = (int*)malloc(sizeof(int) * n / 2);
 			B22[i] = (int*)malloc(sizeof(int) * n / 2);
+
+			M1[i] = (int*)malloc(sizeof(int) * n / 2);
+			M2[i] = (int*)malloc(sizeof(int) * n / 2);
+			M3[i] = (int*)malloc(sizeof(int) * n / 2);
+			M4[i] = (int*)malloc(sizeof(int) * n / 2);
+			M5[i] = (int*)malloc(sizeof(int) * n / 2);
+			M6[i] = (int*)malloc(sizeof(int) * n / 2);
+			M7[i] = (int*)malloc(sizeof(int) * n / 2);
+
+			T1[i] = (int*)malloc(sizeof(int) * n / 2);
+			T2[i] = (int*)malloc(sizeof(int) * n / 2);
+
 		}
 
 		for (i = 0; i < n / 2; i++) {
@@ -93,10 +119,18 @@ void strassen(int n, const int A[ROW][COL], const int B[ROW][COL], int C[ROW][CO
 			matrixPrint(n / 2, A22[i]);
 			cout << endl;
 		}*/
+
+		for (i = 0; i < n / 2; i++) {
+			for (j = 0; j < n / 2; j++) {
+				T1[i][j] = A11[i][j] + A22[i][j];
+				T2[i][j] = B11[i][j] + B22[i][j];
+			}
+		}
+		strassen(2/n,T1,T2,)
 	}
 }
 
-void matrixmult(int n, const int A[ROW][COL], const int B[ROW][COL], int C[ROW][COL]) {
+void matrixmult(int n, const int A[][n], const int B[][n], int C[ROW][COL]) {
 	int i, j, k;
 	for (i = 0; i < n; i++) {
 		for (j = 0; j < n; j++) {
