@@ -1,14 +1,13 @@
 #include <iostream>
+#include <fstream>
 #include <vector>
+#include <iomanip>
 using namespace std;
-#define ROW 4
-#define COL 4
-#define THRESHOLD 1
-void strassen(int n, vector<vector<int>> A, vector<vector<int>> B, vector<vector<int>> &C);
-void matrixmult(int n, vector<vector<int>> A, vector<vector<int>> B, vector<vector<int>> C);
-void matrixPrint(vector<vector<int>>);
+void strassen(int n, vector<vector<int>> A, vector<vector<int>> B, vector<vector<int>> &C); // strassen 함수
+void matPrn(vector<vector<int>> A); // 행렬 출력 함수
+int max(int a, int b); // 비교하여 큰 값 리턴하는 함수
 
-vector<vector<int>> operator+(vector<vector<int>> A, vector<vector<int>> B) {
+vector<vector<int>> operator+(vector<vector<int>> A, vector<vector<int>> B) { // 행렬 덧셈 연산자 
 	int i, j;
 	vector<vector<int>> C(A.size(), vector<int>(A.size(), 0));
 	for (i = 0; i < A.size(); i++) {
@@ -18,7 +17,7 @@ vector<vector<int>> operator+(vector<vector<int>> A, vector<vector<int>> B) {
 	}
 	return C;
 }
-vector<vector<int>> operator-(vector<vector<int>> A, vector<vector<int>> B) {
+vector<vector<int>> operator-(vector<vector<int>> A, vector<vector<int>> B) { // 행렬 뺄셈 연산자
 	int i, j;
 	vector<vector<int>> C(A.size(), vector<int>(A.size(), 0));
 	for (i = 0; i < A.size(); i++) {
@@ -28,7 +27,7 @@ vector<vector<int>> operator-(vector<vector<int>> A, vector<vector<int>> B) {
 	}
 	return C;
 }
-vector<vector<int>> operator*(vector<vector<int>> A, vector<vector<int>> B) {
+vector<vector<int>> operator*(vector<vector<int>> A, vector<vector<int>> B) { //행렬 곱셈 연산자
 	int i, j, k;
 	vector<vector<int>> C(A.size(), vector<int>(A.size(), 0));
 	for (i = 0; i < A.size(); i++) {
@@ -44,22 +43,35 @@ vector<vector<int>> operator*(vector<vector<int>> A, vector<vector<int>> B) {
 
 int main() {
 
-	vector<vector<int>> A(4,vector<int>(4,1));
-	vector<vector<int>> B(4, vector<int>(4, 1));
-	vector<vector<int>> C(4,vector<int>(4,1));
-	
-	/*matrixPrint(A);
-	matrixPrint(A);
-	matrixPrint(A);
-*/
-	cout << "A";
-	matrixPrint(A);
-	cout << " result >>" << endl;
-	
-	strassen(4, A, B, C);
+	vector<vector<int>> A,B,C;
 
-	matrixPrint(C);
-	int	i = 3;
+	int i, j, N;
+	int Arow,Acol,Brow,Bcol;
+	fstream fin("d:\\data\\input.txt"); // 파일 입력
+	fin >> Arow; 
+	fin >> Acol;
+	fin >> Brow;
+	fin >> Bcol;
+
+	N = max(Arow, Acol);
+	A.assign(N, vector<int>(N, 0));
+	B.assign(N, vector<int>(N, 0));
+	C.assign(N, vector<int>(N, 0));
+
+	
+	for (i = 0; i < Arow; i++) {
+		for (j = 0; j < Acol; j++) {
+			fin >> A[i][j];
+		}
+	}
+	for (i = 0; i < Brow; i++) {
+		for (j = 0; j < Bcol; j++) {
+			fin >> B[i][j];
+		}
+	}
+	
+	strassen(N, A, B, C); // 함수 호출
+	matPrn(C); // 함수 출력
 
 	cin.get();
 	return 0;
@@ -67,42 +79,40 @@ int main() {
 
 void strassen(int n, vector<vector<int>> A, vector<vector<int>> B, vector<vector<int>> &C) {
 	int i, j;
-	//cout << "A";
-	//matrixPrint(A);
 
-	//cout << "C";
-	//matrixPrint(C);
-
-	if (n <= THRESHOLD) {
-		if (n < 1)
-			return;
-		matrixmult(n, A, B, C);
+	if (n <= 1) 
+	{
+		C = A*B;
 		return;
 	}
-	else {
-		vector<vector<int>> A11(n / 2, vector<int>(n / 2, 0));
-		vector<vector<int>> A12(n / 2, vector<int>(n / 2, 0));
-		vector<vector<int>> A21(n / 2, vector<int>(n / 2, 0));
-		vector<vector<int>> A22(n / 2, vector<int>(n / 2, 0));
-		vector<vector<int>> B11(n / 2, vector<int>(n / 2, 0));
-		vector<vector<int>> B12(n / 2, vector<int>(n / 2, 0));
-		vector<vector<int>> B21(n / 2, vector<int>(n / 2, 0));
-		vector<vector<int>> B22(n / 2, vector<int>(n / 2, 0));
+	else
+	{
+		vector<vector<int>> A11, A12, A21, A22, B11,B12,B21,B22 ; // 알고리즘 수행을 위한 행렬 선언
+		vector<vector<int>> M1,M2,M3,M4,M5,M6,M7,T1,T2,T3,T4;
 
-		vector<vector<int>> M1(n / 2, vector<int>(n / 2, 0));
-		vector<vector<int>> M2(n / 2, vector<int>(n / 2, 0));
-		vector<vector<int>> M3(n / 2, vector<int>(n / 2, 0));
-		vector<vector<int>> M4(n / 2, vector<int>(n / 2, 0));
-		vector<vector<int>> M5(n / 2, vector<int>(n / 2, 0));
-		vector<vector<int>> M6(n / 2, vector<int>(n / 2, 0));
-		vector<vector<int>> M7(n / 2, vector<int>(n / 2, 0));
+		A11.assign(n / 2, vector<int>(n / 2, 0)); // n/2사이즈 행렬로 설정
+		A12.assign(n / 2, vector<int>(n / 2, 0));
+		A21.assign(n / 2, vector<int>(n / 2, 0));
+		A22.assign(n / 2, vector<int>(n / 2, 0));
+		B11.assign(n / 2, vector<int>(n / 2, 0));
+		B12.assign(n / 2, vector<int>(n / 2, 0));
+		B21.assign(n / 2, vector<int>(n / 2, 0));
+		B22.assign(n / 2, vector<int>(n / 2, 0));
 
-		vector<vector<int>> T1(n / 2, vector<int>(n / 2, 0));
-		vector<vector<int>> T2(n / 2, vector<int>(n / 2, 0));
-		vector<vector<int>> T3(n / 2, vector<int>(n / 2, 0));
-		vector<vector<int>> T4(n / 2, vector<int>(n / 2, 0));
+		M1.assign(n / 2, vector<int>(n / 2, 0));
+		M2.assign(n / 2, vector<int>(n / 2, 0));
+		M3.assign(n / 2, vector<int>(n / 2, 0));
+		M4.assign(n / 2, vector<int>(n / 2, 0));
+		M5.assign(n / 2, vector<int>(n / 2, 0));
+		M6.assign(n / 2, vector<int>(n / 2, 0));
+		M7.assign(n / 2, vector<int>(n / 2, 0));
 
-		for (i = 0; i < n / 2; i++) {
+		T1.assign(n / 2, vector<int>(n / 2, 0));
+		T2.assign(n / 2, vector<int>(n / 2, 0));
+		T3.assign(n / 2, vector<int>(n / 2, 0));
+		T4.assign(n / 2, vector<int>(n / 2, 0));
+
+		for (i = 0; i < n / 2; i++) { //A11,B11 값 설정
 			for (j = 0; j < n / 2; j++) {
 				A11[i][j] = A[i][j];
 				B11[i][j] = B[i][j];
@@ -123,7 +133,6 @@ void strassen(int n, vector<vector<int>> A, vector<vector<int>> B, vector<vector
 			}
 		}
 
-
 		strassen(n / 2, A11 + A22, B11 + B22, M1);
 		strassen(n / 2 ,A21 + A22, B11, M2);
 		strassen(n / 2, A11 , B12 -  B22, M3);
@@ -132,15 +141,10 @@ void strassen(int n, vector<vector<int>> A, vector<vector<int>> B, vector<vector
 		strassen(n / 2, A21 - A11, B11+ B12, M6);
 		strassen(n / 2, A12 - A22, B21 + B22, M7);
 	
-		cout << "M1";
-		matrixPrint(M1);
 		T1 = M1 + M4 - M5 + M7;
 		T2=  M3 + M5;
 		T3=  M2 + M4;
 		T4=  M1 - M2 + M3+ M6;
-		//cout << "T";
-		//matrixPrint(T1);
-
 
 		for (i = 0; i < n/2; i++) {
 			for (j = 0; j < n / 2; j++) {
@@ -158,32 +162,22 @@ void strassen(int n, vector<vector<int>> A, vector<vector<int>> B, vector<vector
 				C[i][j] = T4[i%(n/2)][j % (n / 2)];
 			}
 		}
-
-	//	matrixPrint(C);
 	}
 }
-
-void matrixmult(int n, vector<vector<int>> A, vector<vector<int>> B, vector<vector<int>> C) {
-	int i, j, k;
-	for (i = 0; i < n; i++) {
-		for (j = 0; j < n; j++) {
-			C[i][j] = 0;
-			for (k = 0; k < n; k++) {
-				C[i][j] += A[i][k] * B[k][j];
-			}
-		}
-	}
-
-}
-
-void matrixPrint(vector<vector<int>> A) {
-	cout << "Matrix >>" << endl;
-	//vector<int>::iterator itor;
+void matPrn(vector<vector<int>> A) {
 	for (int i = 0; i < A.size(); i++) {
 		for (int j = 0; j < A.size(); j++) {
-			cout << A[i][j] <<" ";
+			cout << setw(5) << A[i][j] <<" ";
 		}
 		cout << endl;
 	}
 	cout << endl;
+}
+int max(int a, int b) {
+	if (a > b) {
+		return a;
+	}
+	else {
+		return b;
+	}
 }
