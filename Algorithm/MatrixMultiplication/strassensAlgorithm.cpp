@@ -1,101 +1,112 @@
 #include <iostream>
+#include <vector>
 using namespace std;
-
 #define ROW 4
 #define COL 4
 #define THRESHOLD 1
+void strassen(int n, vector<vector<int>> A, vector<vector<int>> B, vector<vector<int>> &C);
+void matrixmult(int n, vector<vector<int>> A, vector<vector<int>> B, vector<vector<int>> C);
+void matrixPrint(vector<vector<int>>);
 
-void strassen(int n, const int A[][n], const int B[][n], int C[][n]);
-void matrixmult(int n, const int A[][n], const int B[][n], int C[][n]);
-void matrixPrint(int n, const int *A);
+vector<vector<int>> operator+(vector<vector<int>> A, vector<vector<int>> B) {
+	int i, j;
+	vector<vector<int>> C(A.size(), vector<int>(A.size(), 0));
+	for (i = 0; i < A.size(); i++) {
+		for (j = 0; j < A.size(); j++) {
+			C[i][j] = A[i][j] + B[i][j];
+		}
+	}
+	return C;
+}
+vector<vector<int>> operator-(vector<vector<int>> A, vector<vector<int>> B) {
+	int i, j;
+	vector<vector<int>> C(A.size(), vector<int>(A.size(), 0));
+	for (i = 0; i < A.size(); i++) {
+		for (j = 0; j < A.size(); j++) {
+			C[i][j] = A[i][j] - B[i][j];
+		}
+	}
+	return C;
+}
+vector<vector<int>> operator*(vector<vector<int>> A, vector<vector<int>> B) {
+	int i, j, k;
+	vector<vector<int>> C(A.size(), vector<int>(A.size(), 0));
+	for (i = 0; i < A.size(); i++) {
+		for (j = 0; j < A.size(); j++) {
+			C[i][j] = 0;
+			for (k = 0; k < A.size(); k++) {
+				C[i][j] += A[i][k] * B[k][j];
+			}
+		}
+	}
+	return C;
+}
+
 int main() {
 
-	int A[ROW][COL] = { { 1,1,1,1 },{ 1,1,1,1 },{ 1,1,1,1 },{ 1,1,1,1 } };
-	int B[ROW][COL] = { { 1,1,1,1 },{ 1,1,1,1 },{ 1,1,1,1 },{ 1,1,1,1 } };
-	int C[ROW][COL] = { { 0, } };
-
-	for (int i = 0; i < ROW; i++) {
-		for (int j = 0; j < COL; j++) {
-			cout << C[i][j] << " ";
-		}
-		cout << endl;
-	}
-
-	cout << " result >>" << endl;
-	strassen(ROW, A, B, C);
-
-	//for (int i = 0; i < ROW; i++) {
-	//	for (int j = 0; j < COL; j++) {
-	//		cout << C[i][j] << " ";
-	//	}
-	//	cout << endl;
-	//}
-
+	vector<vector<int>> A(4,vector<int>(4,1));
+	vector<vector<int>> B(4, vector<int>(4, 1));
+	vector<vector<int>> C(4,vector<int>(4,1));
 	
+	/*matrixPrint(A);
+	matrixPrint(A);
+	matrixPrint(A);
+*/
+	cout << "A";
+	matrixPrint(A);
+	cout << " result >>" << endl;
+	
+	strassen(4, A, B, C);
 
+	matrixPrint(C);
+	int	i = 3;
+
+	cin.get();
 	return 0;
 }
 
-void strassen(int n, const int A[ROW][COL], const int B[ROW][COL], int C[ROW][COL]) {
+void strassen(int n, vector<vector<int>> A, vector<vector<int>> B, vector<vector<int>> &C) {
 	int i, j;
+	//cout << "A";
+	//matrixPrint(A);
+
+	//cout << "C";
+	//matrixPrint(C);
 
 	if (n <= THRESHOLD) {
-		matrixmult(ROW, A, B, C);
+		if (n < 1)
+			return;
+		matrixmult(n, A, B, C);
+		return;
 	}
 	else {
-		int **A11 = (int**)malloc(sizeof(int*) * n / 2);
-		int **A12 = (int**)malloc(sizeof(int*) * n / 2);
-		int **A21 = (int**)malloc(sizeof(int*) * n / 2);
-		int **A22 = (int**)malloc(sizeof(int*) * n / 2);
+		vector<vector<int>> A11(n / 2, vector<int>(n / 2, 0));
+		vector<vector<int>> A12(n / 2, vector<int>(n / 2, 0));
+		vector<vector<int>> A21(n / 2, vector<int>(n / 2, 0));
+		vector<vector<int>> A22(n / 2, vector<int>(n / 2, 0));
+		vector<vector<int>> B11(n / 2, vector<int>(n / 2, 0));
+		vector<vector<int>> B12(n / 2, vector<int>(n / 2, 0));
+		vector<vector<int>> B21(n / 2, vector<int>(n / 2, 0));
+		vector<vector<int>> B22(n / 2, vector<int>(n / 2, 0));
 
-		int **B11 = (int**)malloc(sizeof(int*) * n / 2);
-		int **B12 = (int**)malloc(sizeof(int*) * n / 2);
-		int **B21 = (int**)malloc(sizeof(int*) * n / 2);
-		int **B22 = (int**)malloc(sizeof(int*) * n / 2);
+		vector<vector<int>> M1(n / 2, vector<int>(n / 2, 0));
+		vector<vector<int>> M2(n / 2, vector<int>(n / 2, 0));
+		vector<vector<int>> M3(n / 2, vector<int>(n / 2, 0));
+		vector<vector<int>> M4(n / 2, vector<int>(n / 2, 0));
+		vector<vector<int>> M5(n / 2, vector<int>(n / 2, 0));
+		vector<vector<int>> M6(n / 2, vector<int>(n / 2, 0));
+		vector<vector<int>> M7(n / 2, vector<int>(n / 2, 0));
 
-		int **M1 = (int**)malloc(sizeof(int*) * n / 2);
-		int **M2 = (int**)malloc(sizeof(int*) * n / 2);
-		int **M3 = (int**)malloc(sizeof(int*) * n / 2);
-		int **M4 = (int**)malloc(sizeof(int*) * n / 2);
-		int **M5 = (int**)malloc(sizeof(int*) * n / 2);
-		int **M6 = (int**)malloc(sizeof(int*) * n / 2);
-		int **M7 = (int**)malloc(sizeof(int*) * n / 2);
-
-		int **T1 = (int**)malloc(sizeof(int*) * n / 2);
-		int **T2 = (int**)malloc(sizeof(int*) * n / 2);
-
-
-		for (i = 0; i < n / 2; i++) {
-			A11[i] = (int*)malloc(sizeof(int) * n / 2);
-			A12[i] = (int*)malloc(sizeof(int) * n / 2);
-			A21[i] = (int*)malloc(sizeof(int) * n / 2);
-			A22[i] = (int*)malloc(sizeof(int) * n / 2);
-
-			B11[i] = (int*)malloc(sizeof(int) * n / 2);
-			B12[i] = (int*)malloc(sizeof(int) * n / 2);
-			B21[i] = (int*)malloc(sizeof(int) * n / 2);
-			B22[i] = (int*)malloc(sizeof(int) * n / 2);
-
-			M1[i] = (int*)malloc(sizeof(int) * n / 2);
-			M2[i] = (int*)malloc(sizeof(int) * n / 2);
-			M3[i] = (int*)malloc(sizeof(int) * n / 2);
-			M4[i] = (int*)malloc(sizeof(int) * n / 2);
-			M5[i] = (int*)malloc(sizeof(int) * n / 2);
-			M6[i] = (int*)malloc(sizeof(int) * n / 2);
-			M7[i] = (int*)malloc(sizeof(int) * n / 2);
-
-			T1[i] = (int*)malloc(sizeof(int) * n / 2);
-			T2[i] = (int*)malloc(sizeof(int) * n / 2);
-
-		}
+		vector<vector<int>> T1(n / 2, vector<int>(n / 2, 0));
+		vector<vector<int>> T2(n / 2, vector<int>(n / 2, 0));
+		vector<vector<int>> T3(n / 2, vector<int>(n / 2, 0));
+		vector<vector<int>> T4(n / 2, vector<int>(n / 2, 0));
 
 		for (i = 0; i < n / 2; i++) {
 			for (j = 0; j < n / 2; j++) {
 				A11[i][j] = A[i][j];
 				B11[i][j] = B[i][j];
 			}
-		}
-		for (i = 0; i < n / 2; i++) {
 			for (j = n / 2; j < n; j++) {
 				A12[i][j % (n / 2)] = A[i][j];
 				B12[i][j % (n / 2)] = B[i][j];
@@ -106,31 +117,53 @@ void strassen(int n, const int A[ROW][COL], const int B[ROW][COL], int C[ROW][CO
 				A21[i % (n / 2)][j] = A[i][j];
 				B21[i % (n / 2)][j] = B[i][j];
 			}
-		}
-		for (i = n / 2; i < n; i++) {
 			for (j = n / 2; j < n; j++) {
 				A22[i % (n / 2)][j % (n / 2)] = A[i][j];
 				B22[i % (n / 2)][j % (n / 2)] = B[i][j];
 			}
 		}
 
-	/*	cout << " A22>>" << endl;
-		for (i = 0; i < n / 2; i++) {
-			matrixPrint(n / 2, A22[i]);
-			cout << endl;
-		}*/
 
-		for (i = 0; i < n / 2; i++) {
+		strassen(n / 2, A11 + A22, B11 + B22, M1);
+		strassen(n / 2 ,A21 + A22, B11, M2);
+		strassen(n / 2, A11 , B12 -  B22, M3);
+		strassen(n / 2, A22 , B21 - B11, M4);
+		strassen(n / 2, A11 + A12, B22, M5);
+		strassen(n / 2, A21 - A11, B11+ B12, M6);
+		strassen(n / 2, A12 - A22, B21 + B22, M7);
+	
+		cout << "M1";
+		matrixPrint(M1);
+		T1 = M1 + M4 - M5 + M7;
+		T2=  M3 + M5;
+		T3=  M2 + M4;
+		T4=  M1 - M2 + M3+ M6;
+		//cout << "T";
+		//matrixPrint(T1);
+
+
+		for (i = 0; i < n/2; i++) {
 			for (j = 0; j < n / 2; j++) {
-				T1[i][j] = A11[i][j] + A22[i][j];
-				T2[i][j] = B11[i][j] + B22[i][j];
+				C[i][j] = T1[i][j];
+			}
+			for (j = n / 2; j < n; j++) {
+				C[i][j] = T2[i][j%(n/2)];
 			}
 		}
-		strassen(2/n,T1,T2,)
+		for (i = n/2; i < n; i++) {
+			for (j = 0; j < n / 2; j++) {
+				C[i][j] = T3[i%(n/2)][j];
+			}
+			for (j = n / 2; j < n; j++) {
+				C[i][j] = T4[i%(n/2)][j % (n / 2)];
+			}
+		}
+
+	//	matrixPrint(C);
 	}
 }
 
-void matrixmult(int n, const int A[][n], const int B[][n], int C[ROW][COL]) {
+void matrixmult(int n, vector<vector<int>> A, vector<vector<int>> B, vector<vector<int>> C) {
 	int i, j, k;
 	for (i = 0; i < n; i++) {
 		for (j = 0; j < n; j++) {
@@ -140,11 +173,17 @@ void matrixmult(int n, const int A[][n], const int B[][n], int C[ROW][COL]) {
 			}
 		}
 	}
+
 }
 
-void matrixPrint(int n, const int *A) {
-	int len= sizeof(A) / sizeof(A[0]);
-	for (int i = 0; i <= len; i++) {
-		cout << A[i] << " ";
+void matrixPrint(vector<vector<int>> A) {
+	cout << "Matrix >>" << endl;
+	//vector<int>::iterator itor;
+	for (int i = 0; i < A.size(); i++) {
+		for (int j = 0; j < A.size(); j++) {
+			cout << A[i][j] <<" ";
+		}
+		cout << endl;
 	}
+	cout << endl;
 }
