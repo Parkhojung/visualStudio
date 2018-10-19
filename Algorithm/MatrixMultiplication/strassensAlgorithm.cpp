@@ -72,9 +72,8 @@ int main() {
 	}
 	
 	strassen(N, A, B, C); // 함수 호출
-	matPrn(C); // 함수 출력
+	matPrn(C); // 프로그램 수행 결과 출력
 
-	cin.get();
 	return 0;
 }
 
@@ -142,12 +141,12 @@ void strassen(int n, vector<vector<int>> A, vector<vector<int>> B, vector<vector
 		strassen(n / 2, A21 - A11, B11+ B12, M6);
 		strassen(n / 2, A12 - A22, B21 + B22, M7);
 	
-		T1 = M1 + M4 - M5 + M7;
+		T1 = M1 + M4 - M5 + M7; // C의 네 부분 계산 
 		T2=  M3 + M5;
 		T3=  M2 + M4;
 		T4=  M1 - M2 + M3+ M6;
 
-		for (i = 0; i < n/2; i++) {
+		for (i = 0; i < n/2; i++) { // C 계산
 			for (j = 0; j < n / 2; j++) {
 				C[i][j] = T1[i][j];
 			}
