@@ -47,13 +47,14 @@ int main() {
 
 	int i, j, N;
 	int Arow,Acol,Brow,Bcol;
-	fstream fin("d:\\data\\input.txt"); // 파일 입력
+	fstream fin("input2.txt"); // 파일 입력
 	fin >> Arow; 
 	fin >> Acol;
 	fin >> Brow;
 	fin >> Bcol;
 
 	N = max(Arow, Acol);
+
 	A.assign(N, vector<int>(N, 0));
 	B.assign(N, vector<int>(N, 0));
 	C.assign(N, vector<int>(N, 0));
@@ -80,7 +81,7 @@ int main() {
 void strassen(int n, vector<vector<int>> A, vector<vector<int>> B, vector<vector<int>> &C) {
 	int i, j;
 
-	if (n <= 1) 
+	if (n <= 2) 
 	{
 		C = A*B;
 		return;
