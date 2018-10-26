@@ -6,6 +6,7 @@ using namespace std;
 
 #define INFINITE 10000
 
+void floyd(vector<vector<int>> W, vector<vector<int>>& D, vector<vector<int>>& P, int N);
 void matPrn(vector<vector<int>> A, char* matName);
 int minimum(int a, int b);
 void path(vector<vector<int>> P, int q, int r);
@@ -29,23 +30,9 @@ int main() {
 			fin >> W[i][j];
 		}
 	}
-	matPrn(W,"W");
-	D = W;					// 입력 배열을 D에 저장
 
-
-	matPrn(D,"D");
-
-	for (k = 0; k < N; k++) { // floyd 알고리즘 
-		for (i = 0; i < N; i++) {
-			for (j = 0; j < N; j++) {
-				if (D[i][k] + D[k][j] < D[i][j]) {
-					P[i][j] = k+1;				// P 행렬에는 1부터 N으로 저장하여 보기 좋도록 함.
-					D[i][j] = D[i][k] + D[k][j];
-				}
-			}
-		}
-	}
-
+	floyd(W, D, P, N);
+	
 	matPrn(D,"D");
 	matPrn(P,"P");
 	
@@ -54,7 +41,21 @@ int main() {
 	cout << endl;
 	return 0;
 }
-
+void floyd(vector<vector<int>> W, vector<vector<int>>& D, vector<vector<int>>& P, int N) {
+	int i, j, k;
+	
+	D = W;					// 입력 배열을 D에 저장
+	for (k = 0; k < N; k++) { // floyd 알고리즘 
+		for (i = 0; i < N; i++) {
+			for (j = 0; j < N; j++) {
+				if (D[i][k] + D[k][j] < D[i][j]) {
+					P[i][j] = k + 1;				// P 행렬에는 1부터 N으로 저장하여 보기 좋도록 함.
+					D[i][j] = D[i][k] + D[k][j];
+				}
+			}
+		}
+	}
+}
 void matPrn(vector<vector<int>> A, char* matName) {
 	
 	int fontWidth = 10;   // 10 이상의 짝수로 해야 출력 모양이 정상적으로 나옴.
