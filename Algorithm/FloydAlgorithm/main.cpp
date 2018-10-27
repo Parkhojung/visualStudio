@@ -3,10 +3,10 @@ using namespace std;
 #include <vector>
 #include <fstream>
 #include <iomanip>
-
+#include"matPrn.h"
 #define INFINITE 10000
 
-void floyd(vector<vector<int>> W, vector<vector<int>>& D, vector<vector<int>>& P, int N);
+void floyd(vector<vector<int>> W, vector<vector<int>>& D, vector<vector<int>>& P,int N);
 void matPrn(vector<vector<int>> A, char* matName);
 int minimum(int a, int b);
 void path(vector<vector<int>> P, int q, int r);
@@ -31,7 +31,7 @@ int main() {
 		}
 	}
 
-	floyd(W, D, P, N);
+	floyd(W, D, P,N);
 	
 	matPrn(D,"D");
 	matPrn(P,"P");
@@ -56,42 +56,6 @@ void floyd(vector<vector<int>> W, vector<vector<int>>& D, vector<vector<int>>& P
 		}
 	}
 }
-void matPrn(vector<vector<int>> A, char* matName) {
-	
-	int fontWidth = 10;   // 10 이상의 짝수로 해야 출력 모양이 정상적으로 나옴.
-	int blockWidth = fontWidth/2;
-
-	for (int i = 0; i <= A.size()*fontWidth+blockWidth*3; i++) {
-		cout <<  "-";
-	}
-	cout << endl;
-	cout << "l" <<setw(fontWidth-8)<< right << matName <<"[i][j] l"  ;
-	for (int i = 0; i < A.size() ; i++) {
-		cout << setw(fontWidth) <<  i+1;
-	}
-	cout << setw(blockWidth)<<right<<"l"<< endl;
-	for (int i = 0; i <= A.size()*fontWidth + blockWidth * 3; i++) {
-		cout << "-";
-	}
-	cout << endl;
-
-	for (int i = 0; i < A.size(); i++) {
-		cout << "l"<<setw(blockWidth) << i << setw(blockWidth)<<"l";
-
-		for (int j = 0; j < A.size(); j++) {
-			cout << setw(fontWidth) << A[i][j] ;
-		}
-
-		cout << setw(blockWidth)<< right<<"l"<< endl;
-	}
-
-
-	for (int i = 0; i <= A.size()*fontWidth + blockWidth * 3; i++) {
-		cout << "-";
-	}
-	cout << endl;
-	cout << endl;
-}
 int minimum(int a, int b) {
 	if (a > b) {
 		return b;
@@ -100,7 +64,6 @@ int minimum(int a, int b) {
 		return a;
 	}
 }
-
 void path(vector<vector<int>> P, int q, int r) {
 	q = q ;
 	r = r ;
