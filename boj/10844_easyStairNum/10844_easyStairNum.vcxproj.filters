@@ -15,12 +15,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="input.txt">
+    <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
-    </Text>
-    <Text Include="input2.txt">
-      <Filter>소스 파일</Filter>
-    </Text>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="matPrn.h">
@@ -28,8 +25,8 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="floyd.cpp">
+    <Text Include="input.txt">
       <Filter>소스 파일</Filter>
-    </ClCompile>
+    </Text>
   </ItemGroup>
 </Project>
