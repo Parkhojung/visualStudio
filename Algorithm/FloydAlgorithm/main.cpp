@@ -7,8 +7,6 @@ using namespace std;
 #define INFINITE 10000
 
 void floyd(vector<vector<int>> W, vector<vector<int>>& D, vector<vector<int>>& P,int N);
-void matPrn(vector<vector<int>> A, char* matName);
-int minimum(int a, int b);
 void path(vector<vector<int>> P, int q, int r);
 int main() {
 
@@ -37,7 +35,7 @@ int main() {
 	matPrn(P,"P");
 	
 	cout << "path :";
-	path(P, 5-1, 3-1); // 실제 행렬 인덱스는 0부터 시작하므로.
+	path(P, 5-1, 3-1); // 실제 행렬 인덱스는 0부터 시작하므로. P에는 [1,n]의 값이 들어있다.
 	cout << endl;
 	return 0;
 }
@@ -46,6 +44,7 @@ void floyd(vector<vector<int>> W, vector<vector<int>>& D, vector<vector<int>>& P
 	
 	D = W;					// 입력 배열을 D에 저장
 	for (k = 0; k < N; k++) { // floyd 알고리즘 
+		
 		for (i = 0; i < N; i++) {
 			for (j = 0; j < N; j++) {
 				if (D[i][k] + D[k][j] < D[i][j]) {
@@ -56,19 +55,11 @@ void floyd(vector<vector<int>> W, vector<vector<int>>& D, vector<vector<int>>& P
 		}
 	}
 }
-int minimum(int a, int b) {
-	if (a > b) {
-		return b;
-	}
-	else {
-		return a;
-	}
-}
 void path(vector<vector<int>> P, int q, int r) {
 	q = q ;
 	r = r ;
 	if (P[q][r] != 0) {
-		path(P,q, P[q][r]-1); // 인덱스 참조시 -1
+		path(P,q, P[q][r]-1); // 값참조시 -1  이유: [1,n]을 [0,n-1]로 바꿔 행렬 인덱스 접근
 		cout << "v" << (P[q][r]) << " "; 
 		path(P, P[q][r]-1, r);
 	}
