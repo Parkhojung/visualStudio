@@ -16,7 +16,7 @@ int main() {
 
 	fstream fin("input.txt");
 
-	fin >> N;
+	fin >> N;;
 	D.assign(N+1,0);
 	M.assign(N+1, vector<int>(N+1, 0));
 	P.assign(N+1, vector<int>(N+1, 0));
