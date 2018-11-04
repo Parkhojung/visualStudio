@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{901F4758-356A-4A72-AD80-1F7599753403}</ProjectGuid>
+    <ProjectGuid>{C1562024-5221-45A9-9EF6-03271C597774}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>OptimalBinarySearchTree</RootNamespace>
+    <RootNamespace>binomial</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -143,10 +143,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="input.txt" />
-    <Text Include="input2.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
