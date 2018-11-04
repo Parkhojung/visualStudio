@@ -58,8 +58,6 @@ void chainedMatrixMultiplication(int N, vector<int> &D,vector<vector<int>> &M, v
 			M[i][j] = minData;
 			P[i][j] = minIndex;
 		}
-		cout << d << "¹øÂ°" << endl;
-		matPrn(M, "M");
 	}
 
 }
