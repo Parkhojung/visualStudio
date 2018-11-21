@@ -6,12 +6,21 @@ using namespace std;
 
 typedef int index;
 typedef index set_pointer;
-vector<index> U;
+
+struct nodetype {
+	index parent;
+	int depth;
+};
+
+vector<nodetype> U;
+
+
 typedef struct edge {
 	int node1;
 	int node2;
 	int weight;
 }edge;
+
 
 void kruskal(int N, int M, vector<edge> E, vector<edge>& F);
 void makeset(index i);
@@ -22,14 +31,14 @@ void initial(int n);
 void prnEdge(edge item);
 bool compareWeight(const edge& x, const edge& y);
 int main() {
-	int N,M;
+	int N, M;
 	vector<edge> edgeSet;
 	vector<edge> resultEdgeSet;
 	fstream fin("input.txt");
-	
+
 	fin >> N >> M;
 
-	U.assign(N + 1, 0);
+
 	for (int i = 0; i < M; i++) {
 		edge e;
 		fin >> e.node1;
@@ -38,14 +47,14 @@ int main() {
 		edgeSet.push_back(e);
 	}
 
-	
+
 	kruskal(N, M, edgeSet, resultEdgeSet);
 
 	for (auto item : resultEdgeSet) {
 		prnEdge(item);
 
 	}
-	
+
 
 	return 0;
 }
@@ -89,19 +98,22 @@ void kruskal(int N, int M, vector<edge> E, vector<edge>& F) {
 }
 
 void makeset(index i) {
-	U[i] = i;
+	U.push_back({ i, 0}) ;
 }
 set_pointer find(index i) {
 	index j = i;
-	while (U[j] != j)
-		j = U[j];
+	while (U[j].parent != j)
+		j = U[j].parent;
 	return j;
 }
 void merge(set_pointer p, set_pointer q) {
-	if (p < q)
-		U[q] = p;
+	if (U[p].depth == U[q].depth) {
+		U[p].depth += 1;
+		U[q].parent = p;
+	}else if(U[p].depth < U[q].depth)
+		U[p].depth = q;
 	else
-		U[p] = q;
+		U[q].parent = p;
 }
 bool equal(set_pointer p, set_pointer q) {
 	if (p == q)
