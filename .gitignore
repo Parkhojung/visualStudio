@@ -242,3 +242,5 @@ ModelManifest.xml
 .fake/
 /Algorithm/binomialCoefficient
 /Algorithm/ChainedMatrixMultiplication/input2.txt
+/Algorithm/SumOfSubset
+/Algorithm/Fibonacci(notUseArray)

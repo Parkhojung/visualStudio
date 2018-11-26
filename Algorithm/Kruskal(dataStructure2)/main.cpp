@@ -6,21 +6,16 @@ using namespace std;
 
 typedef int index;
 typedef index set_pointer;
-
 struct nodetype {
 	index parent;
 	int depth;
 };
-
 vector<nodetype> U;
-
-
 typedef struct edge {
 	int node1;
 	int node2;
 	int weight;
 }edge;
-
 
 void kruskal(int N, int M, vector<edge> E, vector<edge>& F);
 void makeset(index i);
@@ -30,6 +25,7 @@ bool equal(set_pointer p, set_pointer q);
 void initial(int n);
 void prnEdge(edge item);
 bool compareWeight(const edge& x, const edge& y);
+
 int main() {
 	int N, M;
 	vector<edge> edgeSet;
@@ -37,7 +33,6 @@ int main() {
 	fstream fin("input.txt");
 
 	fin >> N >> M;
-
 
 	for (int i = 0; i < M; i++) {
 		edge e;
@@ -47,39 +42,31 @@ int main() {
 		edgeSet.push_back(e);
 	}
 
-
+	cout <<  "#입력데이터" << endl;
+	for (auto e : edgeSet) {
+		prnEdge(e);
+	}
 	kruskal(N, M, edgeSet, resultEdgeSet);
-
-	for (auto item : resultEdgeSet) {
-		prnEdge(item);
+	
+	cout << endl <<"#프로그램 수행결과" << endl;
+	for (auto e : resultEdgeSet) {
+		prnEdge(e);
 
 	}
-
-
 	return 0;
 }
 void prnEdge(edge item) {
-	cout << "(" << item.node1 << "," << item.node2 << ") = " << item.weight << endl;
+	cout << "(" << item.node1 << "," << item.node2 << ") " << item.weight << endl;
 }
-
 bool compareWeight(const edge& x, const edge& y) {
 	return x.weight < y.weight;
 }
-
 void kruskal(int N, int M, vector<edge> E, vector<edge>& F) {
 	index i, j;
 	set_pointer p, q;
 	edge e;
 
 	sort(E.begin(), E.end(), compareWeight);
-
-	for (auto iter : E) {
-		cout << iter.node1 << " ";
-		cout << iter.node2 << " ";
-		cout << iter.weight;
-		cout << endl;
-	}
-
 	initial(N);
 
 	int order = 0;
@@ -95,8 +82,8 @@ void kruskal(int N, int M, vector<edge> E, vector<edge>& F) {
 		}
 		order++;
 	}
+	return;
 }
-
 void makeset(index i) {
 	U.push_back({ i, 0}) ;
 }
@@ -111,7 +98,7 @@ void merge(set_pointer p, set_pointer q) {
 		U[p].depth += 1;
 		U[q].parent = p;
 	}else if(U[p].depth < U[q].depth)
-		U[p].depth = q;
+		U[p].parent = q;
 	else
 		U[q].parent = p;
 }
@@ -123,6 +110,7 @@ bool equal(set_pointer p, set_pointer q) {
 }
 void initial(int n) {
 	index i;
+	makeset(-1);
 	for (i = 1; i <= n; i++) {
 		makeset(i);
 	}
