@@ -59,7 +59,7 @@ void prnEdge(edge item) {
 	cout << "(" << item.node1 << "," << item.node2 << ") " << item.weight << endl;
 }
 bool compareWeight(const edge& x, const edge& y) {
-	return x.weight < y.weight;
+	return x.node1 < y.node1;
 }
 void kruskal(int N, int M, vector<edge> E, vector<edge>& F) {
 	index i, j;
@@ -68,6 +68,12 @@ void kruskal(int N, int M, vector<edge> E, vector<edge>& F) {
 
 	sort(E.begin(), E.end(), compareWeight);
 	initial(N);
+
+	cout << "전처리 후 데이터" << endl;
+	for (auto e : E) {
+		prnEdge(e);
+
+	}
 
 	int order = 0;
 	while (F.size() < N - 1) {
