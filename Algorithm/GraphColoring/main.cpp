@@ -12,7 +12,7 @@ void m_coloring(index level);
 bool promising(index level);
 int main() {
 	
-	fstream fin("input.txt");
+	fstream fin("input2.txt");
 	
 	fin >> n >> m;
 	vcolor.assign(n + 1, 0);

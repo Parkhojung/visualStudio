@@ -43,6 +43,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "monteCarlo to nQueens", "mo
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "monteCarlo to nQueens version2(return colArray)", "monteCarlo to nQueens version2(return colArray)\monteCarlo to nQueens version2(return colArray).vcxproj", "{D21CDDDF-B810-4CC0-9616-5F48BE1029C2}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hamiltonianCircuits", "hamiltonianCircuits\hamiltonianCircuits.vcxproj", "{A35A1E1A-1D98-4856-BB2C-D6545B2AE68D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -211,6 +213,14 @@ Global
 		{D21CDDDF-B810-4CC0-9616-5F48BE1029C2}.Release|x64.Build.0 = Release|x64
 		{D21CDDDF-B810-4CC0-9616-5F48BE1029C2}.Release|x86.ActiveCfg = Release|Win32
 		{D21CDDDF-B810-4CC0-9616-5F48BE1029C2}.Release|x86.Build.0 = Release|Win32
+		{A35A1E1A-1D98-4856-BB2C-D6545B2AE68D}.Debug|x64.ActiveCfg = Debug|x64
+		{A35A1E1A-1D98-4856-BB2C-D6545B2AE68D}.Debug|x64.Build.0 = Debug|x64
+		{A35A1E1A-1D98-4856-BB2C-D6545B2AE68D}.Debug|x86.ActiveCfg = Debug|Win32
+		{A35A1E1A-1D98-4856-BB2C-D6545B2AE68D}.Debug|x86.Build.0 = Debug|Win32
+		{A35A1E1A-1D98-4856-BB2C-D6545B2AE68D}.Release|x64.ActiveCfg = Release|x64
+		{A35A1E1A-1D98-4856-BB2C-D6545B2AE68D}.Release|x64.Build.0 = Release|x64
+		{A35A1E1A-1D98-4856-BB2C-D6545B2AE68D}.Release|x86.ActiveCfg = Release|Win32
+		{A35A1E1A-1D98-4856-BB2C-D6545B2AE68D}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
