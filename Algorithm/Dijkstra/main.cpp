@@ -24,7 +24,7 @@ int main() {
 	int N;
 	vector<vector<number>> W;
 	set_of_edges F;
-	fstream fin("input.txt");
+	fstream fin("input2.txt");
 
 	fin >> N;
 	W.assign(N + 1, vector<number>(N + 1, 0));
@@ -76,5 +76,5 @@ void dijkstra(int n, const vector<vector<number>> W, set_of_edges& F) {
 
 }
 void prnEdge(edge item) {
-	cout << "(" << item.vertex1 << "," << item.vertex2 << ") , length[" << item.vertex2 <<"]:" << item.weight << endl;
+	cout << "(" << item.vertex1 << "," << item.vertex2 << ")" << endl;
 }

@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{AAAB233F-D039-4D42-96A9-10648A011401}</ProjectGuid>
+    <ProjectGuid>{27CA0DC6-9884-49B7-8F71-4B94ABB8CAE6}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Dijkstra</RootNamespace>
+    <RootNamespace>changeProblem</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -145,8 +145,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="input.txt" />
-    <Text Include="input2.txt" />
+    <ClInclude Include="main.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

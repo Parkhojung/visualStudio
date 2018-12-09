@@ -59,7 +59,7 @@ void prnEdge(edge item) {
 	cout << "(" << item.node1 << "," << item.node2 << ") " << item.weight << endl;
 }
 bool compareWeight(const edge& x, const edge& y) {
-	return x.node1 < y.node1;
+	return x.weight < y.weight;
 }
 void kruskal(int N, int M, vector<edge> E, vector<edge>& F) {
 	index i, j;

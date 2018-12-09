@@ -19,10 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{AAAB233F-D039-4D42-96A9-10648A011401}</ProjectGuid>
+    <ProjectGuid>{6F415196-FFC7-4F71-A633-77E49D34B765}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Dijkstra</RootNamespace>
+    <RootNamespace>SumOfSubset2</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>SumOfSubset</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{AAAB233F-D039-4D42-96A9-10648A011401}</ProjectGuid>
+    <ProjectGuid>{EF4EDB3F-47BE-4FCB-8984-C348939E7706}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Dijkstra</RootNamespace>
+    <RootNamespace>GraphColoring</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -146,7 +146,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt" />
-    <Text Include="input2.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

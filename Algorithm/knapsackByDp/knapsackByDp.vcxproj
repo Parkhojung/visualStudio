@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{AAAB233F-D039-4D42-96A9-10648A011401}</ProjectGuid>
+    <ProjectGuid>{3870F5C0-AB5A-49ED-AA22-0855FFE23F41}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Dijkstra</RootNamespace>
+    <RootNamespace>knapsackByDp</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -146,7 +146,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt" />
-    <Text Include="input2.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
