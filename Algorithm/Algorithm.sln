@@ -47,6 +47,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hamiltonianCircuits", "hami
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0-1knapsack version1 by backtracking", "0-1knapsack version1 by backtracking\0-1knapsack version1 by backtracking.vcxproj", "{AB710B2A-618D-45CF-BD42-59AF7FA174F8}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0-1 knapsack version2 by bfs", "0-1 knapsack version2 by bfs\0-1 knapsack version2 by bfs.vcxproj", "{6DAAD773-2C69-4C27-9A57-15D3EE116B41}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -231,6 +233,14 @@ Global
 		{AB710B2A-618D-45CF-BD42-59AF7FA174F8}.Release|x64.Build.0 = Release|x64
 		{AB710B2A-618D-45CF-BD42-59AF7FA174F8}.Release|x86.ActiveCfg = Release|Win32
 		{AB710B2A-618D-45CF-BD42-59AF7FA174F8}.Release|x86.Build.0 = Release|Win32
+		{6DAAD773-2C69-4C27-9A57-15D3EE116B41}.Debug|x64.ActiveCfg = Debug|x64
+		{6DAAD773-2C69-4C27-9A57-15D3EE116B41}.Debug|x64.Build.0 = Debug|x64
+		{6DAAD773-2C69-4C27-9A57-15D3EE116B41}.Debug|x86.ActiveCfg = Debug|Win32
+		{6DAAD773-2C69-4C27-9A57-15D3EE116B41}.Debug|x86.Build.0 = Debug|Win32
+		{6DAAD773-2C69-4C27-9A57-15D3EE116B41}.Release|x64.ActiveCfg = Release|x64
+		{6DAAD773-2C69-4C27-9A57-15D3EE116B41}.Release|x64.Build.0 = Release|x64
+		{6DAAD773-2C69-4C27-9A57-15D3EE116B41}.Release|x86.ActiveCfg = Release|Win32
+		{6DAAD773-2C69-4C27-9A57-15D3EE116B41}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
