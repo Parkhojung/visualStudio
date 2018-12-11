@@ -3,16 +3,17 @@ using namespace std;
 #include <queue>
 #include <vector>
 #include <fstream>
-int W;
+
+
 int n;
+int best;
+int bestLevel;
+int W;
+
 vector<int> pArr;
 vector<int> wArr;
 vector<string> include;
-int best;
 vector<string> bestInclude;
-int bestLevel;
-int W;
-int best;
 struct node {
 	int level;
 	int profit;
@@ -20,6 +21,7 @@ struct node {
 };
 queue<node> Q;
 queue<int> IQ;
+int bound(node u);
 
 void fun();
 int main() {

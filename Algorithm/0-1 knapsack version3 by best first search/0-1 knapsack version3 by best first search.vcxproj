@@ -19,11 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{AB710B2A-618D-45CF-BD42-59AF7FA174F8}</ProjectGuid>
+    <ProjectGuid>{76CEE72B-86BA-462F-BECB-879CB9967B19}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>My01knapsackversion1bybacktracking</RootNamespace>
+    <RootNamespace>My01knapsackversion3bybestfirstsearch</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
-    <ProjectName>0-1 knapsack version1 by backtracking</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
