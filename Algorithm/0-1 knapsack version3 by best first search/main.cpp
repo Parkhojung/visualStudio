@@ -56,7 +56,7 @@ void fun() {
 	PQ.push(v);
 	while (!PQ.empty()) {
 		v = PQ.top(); PQ.pop();
-
+		;
 		if (v.bound > best) {
 			u.level = v.level + 1;
 			u.profit = v.profit + pArr[v.level + 1];
