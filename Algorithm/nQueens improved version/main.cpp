@@ -5,34 +5,32 @@ using namespace std;
 #include <cmath>
 vector<int> col;
 int n = 4;
-int cnt=0;
+int cnt = 0;
 
 bool promising(int row);
 void preOrder(int row);
-void prnCol();
+void prnCol(int);
 int main() {
 
-	col.assign(n + 1, 0);
+	col.assign(n + 2, 0);
 	preOrder(0);
 
 
-	cout << cnt;
+	cout << "노드 방문횟수: "<< cnt << endl;
 	return 0;
 }
 
 void preOrder(int row) {
 	cnt++;
 
-
-	if (promising(row)) {
-		
-		if (row == n) {
-//			prnCol();
-		}
-		else {
-			for (int j = 1; j <= n; j++) {
-				col[row + 1] = j;
+	if(row ==n)
+		prnCol(row );
+	else {
+		for (int j = 1; j <= n; j++) {
+			col[row + 1] = j;
+			if (promising(row + 1)) {
 				preOrder(row + 1);
+
 			}
 		}
 	}
@@ -49,10 +47,10 @@ bool promising(int row) {
 	}
 	return resFlag;
 }
-void prnCol() {
+void prnCol(int row) {
 
-	for (auto item : col) {
-		cout << item <<" ";
+	for (int i = 1; i <= row; i++) {
+		cout << col[i] << " ";
 	}
 	cout << endl;
 }
